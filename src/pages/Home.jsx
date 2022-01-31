@@ -51,6 +51,8 @@ const Home = ({ list, title, query, info }) => {
     })
   }
 
+  console.log(gameList)
+
   return (
     <>
       {isLoaded ? (
@@ -73,9 +75,9 @@ const Home = ({ list, title, query, info }) => {
             <InfiniteScroll
               dataLength={gameList.list.length}
               next={fetchMoreGame}
-              hasMore={true}
+              hasMore={gameList.list.length <= 50}
               loader={<LoaderSpinner />}
-              endMessage={<LoaderSpinner />}
+              endMessage={<EndMessage>Dead End</EndMessage>}
             >
               {gameList.list && (
                 <Masonry
@@ -149,6 +151,20 @@ const DropdownMenu = styled.div`
   position: absolute;
   left: 0;
   border-radius: 12px;
+`
+
+const EndMessage = styled.div`
+  width: 12rem;
+  height: 3rem;
+  background-color: #202020;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 13px;
+  margin-bottom: 2rem;
+  margin-top: -4rem;
+  color: white;
 `
 
 export default Home

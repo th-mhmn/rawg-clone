@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import { getResizedImage } from "../util/imageResize";
-import { Link } from "react-router-dom";
-import { getPlatform } from "../util/platformsIcon";
-import MetaScore from "./common/MetaScore";
-import { AnimatePresence, motion } from "framer-motion";
-import { popup } from "../util/animations";
-import { getScreenshots } from "../services/gameService";
-import LoaderSpinner from "./common/LoaderSpinner";
-import { getDate } from "../util/date";
+import React, { useEffect, useState } from 'react'
+import styled from 'styled-components'
+import { getResizedImage } from '../util/imageResize'
+import { Link } from 'react-router-dom'
+import { getPlatform } from '../util/platformsIcon'
+import MetaScore from './common/MetaScore'
+import { AnimatePresence, motion } from 'framer-motion'
+import { popup } from '../util/animations'
+import { getScreenshots } from '../services/gameService'
+import LoaderSpinner from './common/LoaderSpinner'
+import { getDate } from '../util/date'
 
 const GameCard = ({ game }) => {
   const {
@@ -18,36 +18,36 @@ const GameCard = ({ game }) => {
     metacritic,
     parent_platforms,
     released,
-  } = game;
-  const [images, setImages] = useState(null);
-  const [currentImage, setCurrentImage] = useState(getResizedImage(img, 640));
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [cardHovered, setCardHovered] = useState(false);
-  const [spanHovered, setSpanHovered] = useState(false);
+  } = game
+  const [images, setImages] = useState(null)
+  const [currentImage, setCurrentImage] = useState(getResizedImage(img, 640))
+  const [isLoaded, setIsLoaded] = useState(false)
+  const [cardHovered, setCardHovered] = useState(false)
+  const [spanHovered, setSpanHovered] = useState(false)
 
   useEffect(() => {
     async function getImages() {
-      const { results } = await getScreenshots(slug);
-      setImages(results);
+      const { results } = await getScreenshots(slug)
+      setImages(results)
       // setImages(results.map)
       // setImages(results.map(result => getResizedImage(result, 640)))
     }
-    getImages();
-    setIsLoaded(true);
-  }, [cardHovered, slug]);
+    getImages()
+    setIsLoaded(true)
+  }, [cardHovered, slug])
 
-  return (
+  return game ? (
     <Card
       variants={popup}
       initial="initial"
       animate="animate"
       whileHover={{ scale: 1.03 }}
       onMouseOver={() => {
-        setCardHovered(true);
+        setCardHovered(true)
       }}
       onMouseLeave={() => {
-        setCardHovered(false);
-        setCurrentImage(getResizedImage(img, 640));
+        setCardHovered(false)
+        setCurrentImage(getResizedImage(img, 640))
       }}
     >
       <div className="container">
@@ -66,16 +66,16 @@ const GameCard = ({ game }) => {
           <Gallery>
             <AnimatePresence>
               <motion.div
-                initial={{ y: "10px" }}
+                initial={{ y: '10px' }}
                 animate={{ y: 0 }}
-                exit={{ y: "10px" }}
+                exit={{ y: '10px' }}
               >
                 {images &&
                   images.map((image) => (
                     <span
                       onMouseOver={() => {
-                        setCurrentImage(image.image);
-                        setSpanHovered(image.id);
+                        setCurrentImage(image.image)
+                        setSpanHovered(image.id)
                       }}
                       onMouseOut={() => setSpanHovered(null)}
                       key={image.id}
@@ -83,8 +83,8 @@ const GameCard = ({ game }) => {
                       <div
                         style={
                           spanHovered === image.id
-                            ? { background: "hsla(0, 0%, 100%, .85)" }
-                            : { background: "hsla(0, 0%, 100%, .4)" }
+                            ? { background: 'hsla(0, 0%, 100%, .85)' }
+                            : { background: 'hsla(0, 0%, 100%, .4)' }
                         }
                         className="bar"
                       />
@@ -98,10 +98,10 @@ const GameCard = ({ game }) => {
       <div onMouseOver={() => setCurrentImage(getResizedImage(img, 640))}>
         <div
           style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            width: "95%",
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            width: '95%',
           }}
         >
           <Platforms>
@@ -122,8 +122,10 @@ const GameCard = ({ game }) => {
         {/*{released && <span className="released">{getDate(game.released)}</span>}*/}
       </div>
     </Card>
-  );
-};
+  ) : (
+    <p>ff</p>
+  )
+}
 
 const Card = styled(motion.div)`
   //min-height: 4rem;
@@ -168,7 +170,7 @@ const Card = styled(motion.div)`
     margin-right: 0.7rem;
     color: black;
   }
-`;
+`
 
 const Platforms = styled.div`
   margin-left: 1rem;
@@ -177,7 +179,7 @@ const Platforms = styled.div`
     height: 17px;
     margin-right: 0.5rem;
   }
-`;
+`
 
 const Gallery = styled.div`
   width: 100%;
@@ -208,6 +210,6 @@ const Gallery = styled.div`
       border-radius: 5px;
     }
   }
-`;
+`
 
-export default GameCard;
+export default GameCard

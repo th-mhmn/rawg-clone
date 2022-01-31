@@ -1,29 +1,29 @@
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import { NavLink } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useEffect, useState } from 'react'
+import styled from 'styled-components'
+import { NavLink } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faAngleDown,
   faAngleUp,
   faBars,
   faTimes,
-} from "@fortawesome/free-solid-svg-icons";
-import { getResizedImage } from "../../util/imageResize";
-import { getAllGenres } from "../../services/genreService";
+} from '@fortawesome/free-solid-svg-icons'
+import { getResizedImage } from '../../util/imageResize'
+import { getAllGenres } from '../../services/genreService'
 
 const Sidebar = () => {
-  const [genres, setGenres] = useState(null);
-  const [showAllGenres, setShowAllGenres] = useState(false);
-  const [showMenu, setShowMenu] = useState(false);
-  let width = window.innerWidth;
+  const [genres, setGenres] = useState(null)
+  const [showAllGenres, setShowAllGenres] = useState(false)
+  const [showMenu, setShowMenu] = useState(false)
+  let width = window.innerWidth
 
   useEffect(() => {
     async function getGenres() {
-      const { results } = await getAllGenres();
-      setGenres(results);
+      const { results } = await getAllGenres()
+      setGenres(results)
     }
-    getGenres();
-  }, []);
+    getGenres()
+  }, [])
 
   return (
     <>
@@ -31,27 +31,27 @@ const Sidebar = () => {
         <StyledSidebar>
           <div>
             <NavLink
-              activeStyle={{ fontWeight: "bolder", color: "grey" }}
+              activeStyle={{ fontWeight: 'bolder', color: 'grey' }}
               to="/games"
             >
               All Games
             </NavLink>
             <NavLink
-              activeStyle={{ fontWeight: "bolder", color: "grey" }}
+              activeStyle={{ fontWeight: 'bolder', color: 'grey' }}
               to="/discover/upcoming"
             >
               Upcoming Games
             </NavLink>
             <h3>Top</h3>
             <NavLink
-              activeStyle={{ fontWeight: "bolder", color: "grey" }}
+              activeStyle={{ fontWeight: 'bolder', color: 'grey' }}
               className="item"
               to="/discover/best-of-the-year"
             >
               Best of the year
             </NavLink>
             <NavLink
-              activeStyle={{ fontWeight: "bolder", color: "grey" }}
+              activeStyle={{ fontWeight: 'bolder', color: 'grey' }}
               className="item"
               to="/discover/popular-in-2020"
             >
@@ -59,21 +59,21 @@ const Sidebar = () => {
             </NavLink>
             <h3>New Releases</h3>
             <NavLink
-              activeStyle={{ fontWeight: "bolder", color: "grey" }}
+              activeStyle={{ fontWeight: 'bolder', color: 'grey' }}
               className="item"
               to="/discover/last-30-days"
             >
               Last 30 days
             </NavLink>
             <NavLink
-              activeStyle={{ fontWeight: "bolder", color: "grey" }}
+              activeStyle={{ fontWeight: 'bolder', color: 'grey' }}
               className="item"
               to="/discover/this-week"
             >
               This Week
             </NavLink>
             <NavLink
-              activeStyle={{ fontWeight: "bolder", color: "grey" }}
+              activeStyle={{ fontWeight: 'bolder', color: 'grey' }}
               className="item"
               to="/discover/next-week"
             >
@@ -84,13 +84,13 @@ const Sidebar = () => {
               style={
                 showAllGenres
                   ? {
-                      height: "auto",
-                      overflowY: "revert",
-                      top: "-150%",
+                      height: 'auto',
+                      overflowY: 'revert',
+                      top: '-150%',
                     }
                   : {
-                      maxHeight: "150px",
-                      overflowY: "hidden",
+                      maxHeight: '150px',
+                      overflowY: 'hidden',
                     }
               }
             >
@@ -134,8 +134,8 @@ const Sidebar = () => {
         </>
       )}
     </>
-  );
-};
+  )
+}
 
 const MenuButton = styled.div`
   width: 50px;
@@ -158,7 +158,7 @@ const MenuButton = styled.div`
     width: 30px;
     height: 30px;
   }
-`;
+`
 
 const Menu = styled.div`
   position: fixed;
@@ -168,7 +168,7 @@ const Menu = styled.div`
   background: #151515;
   border-radius: 50px;
   z-index: 4;
-`;
+`
 
 const StyledSidebar = styled.div`
   max-width: 24vw;
@@ -202,7 +202,7 @@ const StyledSidebar = styled.div`
     font-weight: 400;
     //margin: 0.5rem 0;
   }
-`;
+`
 
 const Row = styled.div`
   margin-bottom: 0.6rem;
@@ -227,7 +227,7 @@ const Row = styled.div`
       object-fit: cover;
     }
   }
-`;
+`
 
 const ShowAll = styled.div`
   width: 100%;
@@ -248,7 +248,7 @@ const ShowAll = styled.div`
       margin-top: 3px;
     }
   }
-`;
+`
 
 const Icon = styled.div`
   width: 30px;
@@ -264,5 +264,5 @@ const Icon = styled.div`
     height: 20px;
     color: grey;
   }
-`;
-export default Sidebar;
+`
+export default Sidebar
