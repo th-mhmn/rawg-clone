@@ -1,0 +1,20 @@
+.masonry-grid {
+  display: -webkit-box; /* Not needed if autoprefixing */
+  display: -ms-flexbox; /* Not needed if autoprefixing */
+  display: flex;
+  margin-left: 0; /* gutter size offset */
+  width: auto;
+}
+.masonry-column {
+  padding: 0.5rem;
+  background-clip: padding-box;
+}
+
+/* Style your items */
+.masonry-column > div {
+  /* change div to reference your elements you put in <Masonry> */
+  margin-bottom: 1.5rem;
+  /*z-index: 0;*/
+}
+
+
