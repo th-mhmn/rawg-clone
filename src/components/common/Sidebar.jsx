@@ -13,7 +13,7 @@ import { getAllGenres } from '../../services/genreService'
 
 const Sidebar = () => {
   const [genres, setGenres] = useState(null)
-  const [showAllGenres, setShowAllGenres] = useState(false)
+  const [showAllGenres, setShowAllGenres] = useState(true)
   const [showMenu, setShowMenu] = useState(false)
   let width = window.innerWidth
 
